@@ -20,3 +20,4 @@ MongoDB Compass query results in .JSON format and their respective screenshots a
 2. Start services:
    ```bash
    docker-compose up -d
+3. Airflow login and password are "airflow".
