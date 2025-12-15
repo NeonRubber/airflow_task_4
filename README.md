@@ -17,7 +17,6 @@ MongoDB Compass query results in .JSON format and their respective screenshots a
 
 ## How to Run
 1. Clone the repository.
-2. Create `.env` file with `AIRFLOW_UID=50000`.
-3. Start services:
+2. Start services:
    ```bash
    docker-compose up -d
