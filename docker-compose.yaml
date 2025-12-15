@@ -1,7 +1,7 @@
-version: '3'
 x-airflow-common:
   &airflow-common
-  image: apache/airflow:2.10.3
+  build: .
+  image: airflow_task_4
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
@@ -11,8 +11,9 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-    _PIP_ADDITIONAL_REQUIREMENTS: "pandas pymongo apache-airflow-providers-mongo==4.0.0"
     AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
+    AIRFLOW_CONN_FS_DEFAULT: "fs://"
+    AIRFLOW_CONN_MONGO_DEFAULT: "mongo://mongo:27017/airflow_db"
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
@@ -78,9 +79,6 @@ services:
   mongo:
     image: mongo:latest
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - "27017:27017"
     volumes:
